@@ -48,7 +48,7 @@ function Index() {
       setEmail('');
       setPassword('');
       setError('');
-    } catch (e) {
+    } catch (e: Error) {
       setError(e.message);
       toast.error("Sign up unsuccessful", {
         position: "top-right",
@@ -86,7 +86,7 @@ function Index() {
 
       // Redirect to DashboardPage after successful login
       router.push('/dashboard');
-    } catch (e) {
+    } catch (e: Error) {
       setError(e.message);
       toast.error("Login unsuccessful", {
         position: "top-right",
