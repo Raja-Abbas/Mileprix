@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Chart from 'react-apexcharts';
-import { MenuItem, FormControl, Select, InputLabel } from '@mui/material';
+import { MenuItem, FormControl, Select } from '@mui/material';
 
 export default function ChartsOverviewDemo() {
   const [timeframe, setTimeframe] = useState('monthly');
 
-  const handleChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-    setTimeframe(event.target.value);
+  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setTimeframe(event.target.value as string);
   };
 
   const series = [
@@ -16,7 +16,7 @@ export default function ChartsOverviewDemo() {
     },
   ];
 
-  const options = {
+  const options: ApexCharts.ApexOptions = {
     chart: {
       type: 'bar',
       height: 290,
@@ -44,7 +44,7 @@ export default function ChartsOverviewDemo() {
     },
     yaxis: {
       labels: {
-        formatter: (val: any) => `${val / 1000}k`,
+        formatter: (val) => `${val / 1000}k`,
       },
     },
     grid: {
