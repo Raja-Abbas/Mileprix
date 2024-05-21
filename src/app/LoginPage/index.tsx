@@ -84,9 +84,10 @@ function Index() {
         progress: undefined,
       });
       console.log({ res });
-
+      if (typeof window !== 'undefined') {
       // Redirect to DashboardPage after successful login
       router.push('/dashboard');
+      }
     } catch (e: any) {
       setError(e.message);
       toast.error("Login unsuccessful", {
