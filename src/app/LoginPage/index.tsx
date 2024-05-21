@@ -17,13 +17,6 @@ function Index() {
   const [showHelloWorld, setShowHelloWorld] = useState<boolean>(false); // State to control "Hello World"
   const router = useRouter(); // Initialize the router
 
-  useEffect(() => {
-    // This code will only run on the client side
-    if (typeof window !== 'undefined') {
-      // Example client-side code
-      console.log('Window object is available:', window);
-    }
-  }, []);
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault(); // Prevent the default form submission behavior
