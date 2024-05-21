@@ -50,12 +50,6 @@ export default function ChartsOverviewDemo() {
     grid: {
       show: false,
     },
-    margin: {
-      top: 10,
-      bottom: 30,
-      left: 40,
-      right: 10,
-    },
   };
 
   return (
@@ -65,7 +59,6 @@ export default function ChartsOverviewDemo() {
           <Select
             labelId="timeframe-select-label"
             value={timeframe}
-            onChange={handleChange}
             label="Timeframe"
           >
             <MenuItem value="daily">Daily</MenuItem>
