@@ -1,6 +1,12 @@
 import React from 'react';
 import Chart from 'react-apexcharts';
 
+type ApexFormatterParam = {
+  globals: {
+    seriesTotals: number[];
+  };
+};
+
 export default function PieActiveArc() {
   const series = [10, 15, 20]; // Data values for the pie chart
   const labels = ['series A', 'series B', 'series C']; // Labels for each data value
@@ -41,9 +47,9 @@ export default function PieActiveArc() {
               show: true,
               showAlways: true,
               label: 'Drivers',
-              formatter: function (w: ApexCharts.W) {
-                return w.globals.seriesTotals.reduce((a, b) => a + b, 0);
-              }
+              formatter: function (w: ApexFormatterParam) {
+                return w.globals.seriesTotals.reduce((a, b) => a + b, 0).toString();
+              }              
             }
           }
         },
