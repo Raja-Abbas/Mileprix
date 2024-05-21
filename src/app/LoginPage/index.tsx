@@ -202,12 +202,30 @@ function Index() {
                   <div className="TextlabelWelcome text-center hover:underline cursor-pointer opacity-80 text-cyan-500 text-lg font-semibold font-inter" onClick={toggleForm}>Login Instead</div>
                 </>
               )}
-              <div className="text-red-500 font-semibold">{error}</div>
+              <h2 className="text-[#FF5701]">{error}</h2>
             </>
           )}
-          <ToastContainer />
+          <h2
+            onClick={handleForgotPassword}
+            className="cursor-pointer font-inter text-[#FF5701] text-center"
+          >
+            Forgot Password
+          </h2>
         </div>
       </form>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }
