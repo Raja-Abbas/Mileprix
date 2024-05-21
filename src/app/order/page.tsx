@@ -6,8 +6,8 @@ import Main from "../components/main";
 import { useRouter } from 'next/navigation';
 
 const Layout: React.FC = () => {
-  const [selectedMenu, setSelectedMenu] = useState("dashboard");
-  const [activeMenu, setActiveMenu] = useState<string>("dashboard");
+  const [selectedMenu, setSelectedMenu] = useState("orders");
+  const [activeMenu, setActiveMenu] = useState<string>("orders");
   const router = useRouter();
 
   const handleMenuClick = (menu: string) => {
