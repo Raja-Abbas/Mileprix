@@ -14,6 +14,7 @@ function Index() {
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [isLogin, setIsLogin] = useState<boolean>(true); // Initially show login form
+  const [showHelloWorld, setShowHelloWorld] = useState<boolean>(false); // State to control "Hello World"
   const router = useRouter(); // Initialize the router
 
   const handleSignUp = async (e: React.FormEvent) => {
@@ -105,6 +106,13 @@ function Index() {
     setError(''); // Clear any previous error messages
   };
 
+  const handleForgotPassword = () => {
+    setEmail('');
+    setPassword('');
+    setError('');
+    setShowHelloWorld(true);
+  };
+
   return (
     <div className="bg-black relative w-screen h-screen flex items-center justify-center overflow-x-hidden">
       <Image
@@ -122,68 +130,92 @@ function Index() {
             alt="BgImage"
             className="w-[218px] h-[50px]"
           />
-          {isLogin ? (
-            <>
-              <h1 className="text-[36px] font-inter font-semibold text-[#212121]">Login</h1>
-              <h1 className=" text-[16px] leading-[28px] font-inter font-semibold text-[#212121]">Login with email and password</h1>
-            </>
+          {showHelloWorld ? (
+            <h1 className="text-center text-2xl font-bold">Hello World</h1>
           ) : (
             <>
-              <h1 className="text-[36px] font-inter font-semibold text-[#212121]">Sign Up</h1>
-              <h1 className=" text-[16px] leading-[28px] font-inter font-semibold text-[#212121]">Create a new account</h1>
+              {isLogin ? (
+                <>
+                  <h1 className="text-[36px] font-inter font-semibold text-[#212121]">Login</h1>
+                  <h1 className=" text-[16px] leading-[28px] font-inter font-semibold text-[#212121]">Login with email and password</h1>
+                </>
+              ) : (
+                <>
+                  <h1 className="text-[36px] font-inter font-semibold text-[#212121]">Sign Up</h1>
+                  <h1 className=" text-[16px] leading-[28px] font-inter font-semibold text-[#212121]">Create a new account</h1>
+                </>
+              )}
+              <div className="">
+                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                  title="Please enter a valid email address"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Email"
+                  required
+                />
+              </div>
+              <div className="">
+                <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  pattern=".{8,}"
+                  title="Password must be at least 8 characters long"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+              {isLogin ? (
+                <>
+                  <button
+                    onClick={handleLogin}
+                    className="w-[100%] text-white bg-[#FF5701] transition-all hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-[16px] uppercase px-5 py-4 text-center dark:bg-[#FF5701] dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >
+                    Login
+                  </button>
+                  <div className="TextlabelWelcome text-center hover:underline cursor-pointer opacity-80 text-cyan-500 text-lg font-semibold font-inter" onClick={toggleForm}>Sign Up Instead</div>
+                </>
+              ) : (
+                <>
+                  <button
+                    onClick={handleSignUp}
+                    className="w-[100%] text-white bg-[#FF5701] transition-all hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-[16px] uppercase px-5 py-4 text-center dark:bg-[#FF5701] dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >
+                    Sign Up
+                  </button>
+                  <div className="TextlabelWelcome text-center hover:underline cursor-pointer opacity-80 text-cyan-500 text-lg font-semibold font-inter" onClick={toggleForm}>Login Instead</div>
+                </>
+              )}
+              {error && <p className="text-red-500 text-center">{error}</p>}
             </>
           )}
-          <div className="">
-            <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Email</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-              title="Please enter a valid email address"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Email"
-              required
-            />
-          </div>
-          <div className="">
-            <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Password</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              pattern=".{8,}"
-              title="Password must be at least 8 characters long"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Password"
-              required
-            />
-          </div>
-          {isLogin ? (
-            <>
+          {showHelloWorld && (
+            <div className="flex justify-around mt-4">
               <button
-                onClick={handleLogin}
-                className="w-[100%] text-white bg-[#FF5701] transition-all hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-[16px] uppercase px-5 py-4 text-center dark:bg-[#FF5701] dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                onClick={() => { setShowHelloWorld(false); setIsLogin(true); }}
+                className="text-cyan-500 hover:underline cursor-pointer opacity-80 text-lg font-semibold"
               >
                 Login
               </button>
-              <div className="TextlabelWelcome text-center hover:underline cursor-pointer opacity-80 text-cyan-500 text-lg font-semibold font-inter" onClick={toggleForm}>Sign Up Instead</div>
-            </>
-          ) : (
-            <>
               <button
-                onClick={handleSignUp}
-                className="w-[100%] text-white bg-[#FF5701] transition-all hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-[16px] uppercase px-5 py-4 text-center dark:bg-[#FF5701] dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                onClick={() => { setShowHelloWorld(false); setIsLogin(false); }}
+                className="text-cyan-500 hover:underline cursor-pointer opacity-80 text-lg font-semibold"
               >
                 Sign Up
               </button>
-              <div className="TextlabelWelcome text-center hover:underline cursor-pointer opacity-80 text-cyan-500 text-lg font-semibold font-inter" onClick={toggleForm}>Login Instead</div>
-            </>
+            </div>
           )}
-          {error && <p className="text-red-500 text-center">{error}</p>}
-          <div className="TextlabelWelcome text-center hover:underline cursor-pointer opacity-80 text-neutral-800 text-lg font-semibold font-inter">Forgot Password?</div>
+          {!showHelloWorld && (
+            <div className="TextlabelWelcome text-center hover:underline cursor-pointer opacity-80 text-neutral-800 text-lg font-semibold font-inter" onClick={handleForgotPassword}>Forgot Password?</div>
+          )}
         </div>
       </form>
 
