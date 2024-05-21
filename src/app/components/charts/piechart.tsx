@@ -5,7 +5,7 @@ export default function PieActiveArc() {
   const series = [10, 15, 20]; // Data values for the pie chart
   const labels = ['series A', 'series B', 'series C']; // Labels for each data value
 
-  const options = {
+  const options: ApexCharts.ApexOptions = {
     chart: {
       type: 'donut', // Use 'donut' for inner radius
       height: 290,
@@ -35,13 +35,13 @@ export default function PieActiveArc() {
             value: {
               show: true,
               fontSize: '16px',
-              formatter: (val: any) => `${val}`,
+              formatter: (val) => `${val}`,
             },
             total: {
               show: true,
               showAlways: true,
               label: 'Drivers',
-              formatter: function (w) {
+              formatter: function (w: ApexCharts.W) {
                 return w.globals.seriesTotals.reduce((a, b) => a + b, 0);
               }
             }
