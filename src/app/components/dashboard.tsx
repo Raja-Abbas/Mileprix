@@ -3,7 +3,6 @@ import Image from "next/image";
 import BarChart from "./charts/barchart";
 import PieChart from "./charts/piechart";
 
-
 const DashboardContent: React.FC = () => {
   const cardData = [
     {
@@ -39,7 +38,7 @@ const DashboardContent: React.FC = () => {
   ];
 
   return (
-    <div className="p-4 pt-10 max-w-[100%]">
+    <div className="p-4 pt-10 max-w-[1400px] mx-auto">
       <div className="grid sm:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
         {cardData.map((card, index) => (
           <div
@@ -47,11 +46,11 @@ const DashboardContent: React.FC = () => {
             className="bg-white hover:shadow-2xl hover:bg-gray-200 cursor-pointer transition-all md:w-[346px] h-[120px] w-full flex flex-col md:flex-row items-center justify-start p-4 px-6 shadow-lg rounded-lg"
           >
             <Image
-            src={card.image}
-            alt={card.title}
-            width={100}
-            height={100}
-            className="w-16 h-16 rounded-none object-cover"
+              src={card.image}
+              alt={card.title}
+              width={100}
+              height={100}
+              className="w-16 h-16 rounded-none object-cover"
             />
             <div className="ml-4">
               <h3 className="font-[400] text-[20px] leading-[24px] text-[#28252C]">{card.title}</h3>
@@ -61,8 +60,8 @@ const DashboardContent: React.FC = () => {
         ))}
       </div>
       <div className="mt-10 gap-5 flex w-[100%] items-center">
-      <BarChart />
-      <PieChart />
+        <BarChart />
+        <PieChart />
       </div>
     </div>
   );
