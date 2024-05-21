@@ -77,7 +77,7 @@ const OrdersContent: React.FC = () => {
         // parent container
         <div key={index}>
           {/* card */}
-          <div className="space-y-5 mt-[30px] bx-shadow">
+          <div className="space-y-5 mt-[30px] w-[260px] bx-shadow">
             {/* id + drop down */}
             <div className="flex justify-between items-center">
               {/* left */}
