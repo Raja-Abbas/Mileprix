@@ -1,5 +1,5 @@
 'use client';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, fetchSignInMethodsForEmail } from "firebase/auth";
 import { auth } from "@/app/firebase/config";
@@ -113,6 +113,13 @@ function Index() {
     setShowHelloWorld(true);
   };
 
+  useEffect(() => {
+    // Example usage of window inside useEffect
+    if (typeof window !== 'undefined') {
+      // Code that requires `window` can go here
+    }
+  }, []);
+
   return (
     <div className="bg-black relative w-screen h-screen flex items-center justify-center overflow-x-hidden">
       <Image
@@ -194,43 +201,12 @@ function Index() {
                   <div className="TextlabelWelcome text-center hover:underline cursor-pointer opacity-80 text-cyan-500 text-lg font-semibold font-inter" onClick={toggleForm}>Login Instead</div>
                 </>
               )}
-              {error && <p className="text-red-500 text-center">{error}</p>}
+              <div className="text-red-500 font-semibold">{error}</div>
             </>
           )}
-          {showHelloWorld && (
-            <div className="flex justify-around mt-4">
-              <button
-                onClick={() => { setShowHelloWorld(false); setIsLogin(true); }}
-                className="text-cyan-500 hover:underline cursor-pointer opacity-80 text-lg font-semibold"
-              >
-                Login
-              </button>
-              <button
-                onClick={() => { setShowHelloWorld(false); setIsLogin(false); }}
-                className="text-cyan-500 hover:underline cursor-pointer opacity-80 text-lg font-semibold"
-              >
-                Sign Up
-              </button>
-            </div>
-          )}
-          {!showHelloWorld && (
-            <div className="TextlabelWelcome text-center hover:underline cursor-pointer opacity-80 text-neutral-800 text-lg font-semibold font-inter" onClick={handleForgotPassword}>Forgot Password?</div>
-          )}
+          <ToastContainer />
         </div>
       </form>
-
-      {/* Toast Container for notifications */}
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
     </div>
   );
 }
