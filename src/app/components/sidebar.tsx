@@ -22,10 +22,12 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ handleMenuClick }) => {
   const [activeMenu, setActiveMenu] = useState<string>("dashboard");
+  const [isSidebarVisible, setIsSidebarVisible] = useState<boolean>(false);
 
   const handleButtonClick = (menu: string) => {
     setActiveMenu(menu);
     handleMenuClick(menu);
+    setIsSidebarVisible(false);  // Automatically close sidebar when a menu is clicked
   };
 
   const buttonClasses = (menu: string) =>
@@ -55,61 +57,85 @@ const Sidebar: React.FC<SidebarProps> = ({ handleMenuClick }) => {
   };
 
   return (
-    <div className="flex gap-8 font-inter font-[500] text-[16px] leading-[30px] flex-col items-start pt-[40px] px-[30px]">
-      <Image
-        src={SiderbarImage}
-        alt="BgImage"
-        className=""
-      />
-      <button
-        className={`w-[100%] px-4 py-2 flex items-center gap-6 ${buttonClasses("dashboard")}`}
-        onClick={() => handleButtonClick("dashboard")}
+    <div>
+      {/* Toggle button for smaller screens */}
+      {!isSidebarVisible && (
+        <button
+          className="lg:hidden p-2 fixed top-4 left-4 text-2xl text-black z-[10000] rounded"
+          onClick={() => setIsSidebarVisible(!isSidebarVisible)}
+        >
+          ☰
+        </button>
+      )}
+
+      <aside
+        id="logo-sidebar"
+        className={`${
+          isSidebarVisible ? "block" : "hidden"
+        } lg:block fixed lg:static z-40 bg-white h-full flex gap-8 font-inter font-[500] text-[16px] leading-[30px] flex-col items-start pt-[25px] px-[30px]`}
+        aria-label="Sidebar"
       >
-        <Image src={getIcon("dashboard")} alt="Dashboard" width={20} height={20} />
-        <p>Dashboard</p>
-      </button>
-      <button
-        className={`w-[100%] px-4 py-2 flex items-center gap-6 ${buttonClasses("orders")}`}
-        onClick={() => handleButtonClick("orders")}
-      >
-        <Image src={getIcon("orders")} alt="Orders" width={20} height={20} />
-        <p>Orders</p>
-      </button>
-      <button
-        className={`w-[100%] px-4 py-2 flex items-center gap-6 ${buttonClasses("company")}`}
-        onClick={() => handleButtonClick("company")}
-      >
-        <Image src={getIcon("company")} alt="Company" width={20} height={20} />
-        <p>Company</p>
-      </button>
-      <button
-        className={`w-[100%] px-4 py-2 flex items-center gap-6 ${buttonClasses("drivers")}`}
-        onClick={() => handleButtonClick("drivers")}
-      >
-        <Image src={getIcon("drivers")} alt="Drivers" width={20} height={20} />
-        <p>Drivers</p>
-      </button>
-      <button
-        className={`w-[100%] px-4 py-2 flex items-center gap-6 ${buttonClasses("devices")}`}
-        onClick={() => handleButtonClick("devices")}
-      >
-        <Image src={getIcon("devices")} alt="Devices" width={20} height={20} />
-        <p>Devices</p>
-      </button>
-      <button
-        className={`w-[100%] px-4 py-2 flex items-center gap-6 ${buttonClasses("account")}`}
-        onClick={() => handleButtonClick("account")}
-      >
-        <Image src={getIcon("account")} alt="Accounts/Transaction" width={20} height={20} />
-        <p>Accounts/Transaction</p>
-      </button>
-      <button
-        className={`w-[100%] px-4 py-2 flex items-center gap-6 ${buttonClasses("settings")}`}
-        onClick={() => handleButtonClick("settings")}
-      >
-        <Image src={getIcon("settings")} alt="Settings" width={20} height={20} />
-        <p>Settings</p>
-      </button>
+        {/* Close button for smaller screens */}
+        {isSidebarVisible && (
+          <button
+            className="lg:hidden p-2 absolute -top-2 right-4 text-2xl text-black rounded"
+            onClick={() => setIsSidebarVisible(false)}
+          >
+            ✕
+          </button>
+        )}
+        
+        <Image src={SiderbarImage} alt="BgImage" className="lg:mb-4" />
+        <button
+          className={`w-[100%] px-4 py-2 flex items-center gap-6 ${buttonClasses("dashboard")}`}
+          onClick={() => handleButtonClick("dashboard")}
+        >
+          <Image src={getIcon("dashboard")} alt="Dashboard" width={20} height={20} />
+          <p>Dashboard</p>
+        </button>
+        <button
+          className={`w-[100%] px-4 py-2 flex items-center gap-6 ${buttonClasses("orders")}`}
+          onClick={() => handleButtonClick("orders")}
+        >
+          <Image src={getIcon("orders")} alt="Orders" width={20} height={20} />
+          <p>Orders</p>
+        </button>
+        <button
+          className={`w-[100%] px-4 py-2 flex items-center gap-6 ${buttonClasses("company")}`}
+          onClick={() => handleButtonClick("company")}
+        >
+          <Image src={getIcon("company")} alt="Company" width={20} height={20} />
+          <p>Company</p>
+        </button>
+        <button
+          className={`w-[100%] px-4 py-2 flex items-center gap-6 ${buttonClasses("drivers")}`}
+          onClick={() => handleButtonClick("drivers")}
+        >
+          <Image src={getIcon("drivers")} alt="Drivers" width={20} height={20} />
+          <p>Drivers</p>
+        </button>
+        <button
+          className={`w-[100%] px-4 py-2 flex items-center gap-6 ${buttonClasses("devices")}`}
+          onClick={() => handleButtonClick("devices")}
+        >
+          <Image src={getIcon("devices")} alt="Devices" width={20} height={20} />
+          <p>Devices</p>
+        </button>
+        <button
+          className={`w-[100%] px-4 py-2 flex items-center gap-6 ${buttonClasses("account")}`}
+          onClick={() => handleButtonClick("account")}
+        >
+          <Image src={getIcon("account")} alt="Accounts/Transaction" width={20} height={20} />
+          <p>Accounts/Transaction</p>
+        </button>
+        <button
+          className={`w-[100%] px-4 py-2 flex items-center gap-6 ${buttonClasses("settings")}`}
+          onClick={() => handleButtonClick("settings")}
+        >
+          <Image src={getIcon("settings")} alt="Settings" width={20} height={20} />
+          <p>Settings</p>
+        </button>
+      </aside>
     </div>
   );
 };

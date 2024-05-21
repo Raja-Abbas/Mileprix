@@ -1,5 +1,5 @@
 'use client';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, fetchSignInMethodsForEmail } from "firebase/auth";
 import { auth } from "@/app/firebase/config";
@@ -16,6 +16,14 @@ function Index() {
   const [isLogin, setIsLogin] = useState<boolean>(true); // Initially show login form
   const [showHelloWorld, setShowHelloWorld] = useState<boolean>(false); // State to control "Hello World"
   const router = useRouter(); // Initialize the router
+
+  useEffect(() => {
+    // This code will only run on the client side
+    if (typeof window !== 'undefined') {
+      // Example client-side code
+      console.log('Window object is available:', window);
+    }
+  }, []);
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault(); // Prevent the default form submission behavior
@@ -194,32 +202,18 @@ function Index() {
                   <div className="TextlabelWelcome text-center hover:underline cursor-pointer opacity-80 text-cyan-500 text-lg font-semibold font-inter" onClick={toggleForm}>Login Instead</div>
                 </>
               )}
-              {error && <p className="text-red-500 text-center">{error}</p>}
+              <h2 className="text-[#FF5701]">{error}</h2>
             </>
           )}
-          {showHelloWorld && (
-            <div className="flex justify-around mt-4">
-              <button
-                onClick={() => { setShowHelloWorld(false); setIsLogin(true); }}
-                className="text-cyan-500 hover:underline cursor-pointer opacity-80 text-lg font-semibold"
-              >
-                Login
-              </button>
-              <button
-                onClick={() => { setShowHelloWorld(false); setIsLogin(false); }}
-                className="text-cyan-500 hover:underline cursor-pointer opacity-80 text-lg font-semibold"
-              >
-                Sign Up
-              </button>
-            </div>
-          )}
-          {!showHelloWorld && (
-            <div className="TextlabelWelcome text-center hover:underline cursor-pointer opacity-80 text-neutral-800 text-lg font-semibold font-inter" onClick={handleForgotPassword}>Forgot Password?</div>
-          )}
+          <h2
+            onClick={handleForgotPassword}
+            className="cursor-pointer font-inter text-[#FF5701] text-center"
+          >
+            Forgot Password
+          </h2>
         </div>
       </form>
 
-      {/* Toast Container for notifications */}
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -230,6 +224,7 @@ function Index() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
+        theme="light"
       />
     </div>
   );

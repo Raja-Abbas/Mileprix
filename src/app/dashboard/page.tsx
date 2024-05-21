@@ -11,8 +11,9 @@ const Layout: React.FC = () => {
   const router = useRouter();
 
   const handleMenuClick = (menu: string) => {
+    setActiveMenu(menu);
     setSelectedMenu(menu);
-  };
+    };
   
 
   return (
