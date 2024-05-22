@@ -16,10 +16,10 @@ const Layout: React.FC = () => {
   
 
   return (
-    <div className="flex bg-white h-screen overflow-hidden">
+    <div className="flex bg-white h-screen">
       <Sidebar handleMenuClick={handleMenuClick}/>
-      <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
-        <Header activeMenu={activeMenu} />
+      <div className="relative flex flex-1 flex-col">
+       <Header activeMenu={activeMenu}/>
         <div className="mx-auto bg-[#F9F9F9] h-screen w-[100%] p-4 md:p-6 2xl:p-10">
         <Main selectedMenu={selectedMenu}/>
         </div>

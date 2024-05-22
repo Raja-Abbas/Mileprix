@@ -7,3 +7,6 @@
     border-radius:8px;
     padding:16px;
 }
+.adjust_header{
+    width: -webkit-fill-available;
+}

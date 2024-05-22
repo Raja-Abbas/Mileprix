@@ -1,4 +1,4 @@
-import { colors } from "@mui/material";
+import { cardClasses, colors } from "@mui/material";
 import dropdown from './../../../public/dropdown.svg';
 import React from "react";
 
@@ -72,6 +72,7 @@ const OrdersContent: React.FC = () => {
   ];
 
   return (
+    <div className="max-w-[1400px] mx-auto">
     <div className="grid grid-cols-3 gap-x-8 ml-9">
       {cardData.map((card, index) => (
         // parent container
@@ -139,6 +140,7 @@ const OrdersContent: React.FC = () => {
           </div>
         </div>
       ))}
+    </div>
     </div>
   );
 }
