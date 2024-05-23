@@ -10,8 +10,8 @@ const Layout: React.FC = () => {
   const [activeMenu, setActiveMenu] = useState<string>("dashboard");
   const router = useRouter();
 
-  const handleMenuClick = (menu: string) => {
-    setActiveMenu(menu);
+  const handleMenuClick = (menu: string) =>{
+        setActiveMenu(menu);
     setSelectedMenu(menu);
   };
 
