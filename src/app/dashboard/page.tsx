@@ -1,9 +1,9 @@
-'use client';
-import React, { useEffect, useState } from "react";
+'use client'
+
 import Sidebar from "../components/sidebar";
-import Header from "../components/header";
 import Main from "../components/main";
 import { useRouter } from 'next/navigation';
+import { useState } from "react";
 
 const Layout: React.FC = () => {
   const [selectedMenu, setSelectedMenu] = useState("dashboard");
@@ -14,19 +14,19 @@ const Layout: React.FC = () => {
     setActiveMenu(menu);
     setSelectedMenu(menu);
   };
+
+
   return (
-    useEffect(()=>{
-      <div className="flex bg-white overflow-hidden">
+    <div className="flex bg-white overflow-hidden">
       <div className="w-[320px]">
-      <Sidebar handleMenuClick={handleMenuClick}/>
+        <Sidebar handleMenuClick={handleMenuClick}/>
       </div>
       <div className="relative flex justify-between flex-1 flex-col overflow-y-auto overflow-x-hidden">
         <div className="mx-auto bg-[#F9F9F9] h-screen w-[100%] p-4 md:p-6 2xl:p-10">
-        <Main selectedMenu={selectedMenu}/>
+          <Main selectedMenu={selectedMenu}/>
         </div>
       </div>
     </div>
-    })
   );
 };
 
