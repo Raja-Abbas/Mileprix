@@ -34,7 +34,7 @@ const Main: React.FC<MainProps> = ({ selectedMenu }) => {
   };
 
   return (
-    <div className="main pt-10">
+    <div className="main">
       {renderComponent()}
     </div>
   );

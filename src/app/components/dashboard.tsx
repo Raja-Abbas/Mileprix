@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import BarChart from "./charts/barchart";
 import PieChart from "./charts/piechart";
+import search from '../../../public/Search.svg';
+import filter from '../../../public/filter.svg';
 
 const DashboardContent: React.FC = () => {
   const cardData = [
@@ -38,7 +40,15 @@ const DashboardContent: React.FC = () => {
   ];
 
   return (
-    <div className="p-4 pt-10 max-w-[1400px] mx-auto">
+    <>
+    <div className="adjust_header flex fixed justify-between p-4 top-0 px-12 bg-white items-center">
+    <div>
+      <h1 className="text-[30px] font-[800]">
+        Dashboard
+      </h1>
+    </div>
+  </div>
+    <div className="p-4 pt-10 max-w-[1400px] mx-auto mt-20">
       <div className="grid sm:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
         {cardData.map((card, index) => (
           <div
@@ -63,6 +73,7 @@ const DashboardContent: React.FC = () => {
         <PieChart />
       </div>
     </div>
+    </>
   );
 };
 

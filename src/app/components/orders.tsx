@@ -1,8 +1,12 @@
 import { cardClasses, colors } from "@mui/material";
 import dropdown from './../../../public/dropdown.svg';
+import search from '../../../public/Search.svg';
+import filter from '../../../public/filter.svg';
+import { useState } from "react";
 import React from "react";
 
 const OrdersContent: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState("");
   const cardData = [
     {
       id: "#ORDERID12892193",
@@ -70,11 +74,44 @@ const OrdersContent: React.FC = () => {
       etea : "18 mins"
     }
   ];
-
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+  const filteredCardData = cardData.filter((card) =>
+    card.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    card.destination.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    card.driver.toLowerCase().includes(searchQuery.toLowerCase())
+)
   return (
-    <div className="max-w-[1400px] mx-auto">
+    <>
+    <div className="adjust_header flex fixed top-0 justify-between p-4 px-12 bg-white items-center">
+      <div>
+        <h1 className="text-[30px] font-[800]">
+          Orders
+        </h1>
+      </div>
+        <div className="relative flex items-center space-x-[18px]">
+          <img className="absolute top-[14px] left-8" src={search.src} alt="Search Icon" />
+          <input
+            className="rounded-xl text-[#B9B9B9] text-[13px] font-[400] w-[250px] py-3 pl-9 pr-2 border-[1px] border-[#E4E4E4]"
+            type="text"
+            placeholder="Search"
+            onChange={handleSearchChange}
+          />
+          {/* filter */}
+          <div>
+            <button className="rounded-xl border-[#FF5701]">
+              <div className="px-4 flex py-[10px] space-x-2 items-center border-[#FF5701] rounded-lg border-[1px]">
+                <img src={filter.src} alt="Filter Icon" />
+                <div className="font-Rubik text-[15px] font-[400] text-[#FF5701]">Filters</div>
+              </div>
+            </button>
+          </div>
+        </div>
+    </div>
+    <div className="max-w-[1400px] mx-auto mt-20">
     <div className="grid grid-cols-3 gap-x-8 ml-9">
-      {cardData.map((card, index) => (
+      {filteredCardData.map((card, index) => (
         // parent container
         <div key={index}>
           {/* card */}
@@ -140,8 +177,9 @@ const OrdersContent: React.FC = () => {
           </div>
         </div>
       ))}
+    </div> 
     </div>
-    </div>
+    </>
   );
 }
 export default OrdersContent;

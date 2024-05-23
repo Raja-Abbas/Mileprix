@@ -20,7 +20,6 @@ const Layout: React.FC = () => {
       <Sidebar handleMenuClick={handleMenuClick}/>
       </div>
       <div className="relative flex justify-between flex-1 flex-col overflow-y-auto overflow-x-hidden">
-        <Header activeMenu={activeMenu} />
         <div className="mx-auto bg-[#F9F9F9] h-screen w-[100%] p-4 md:p-6 2xl:p-10">
         <Main selectedMenu={selectedMenu}/>
         </div>
