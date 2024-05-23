@@ -1,3 +1,4 @@
+'use client'
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, fetchSignInMethodsForEmail } from "firebase/auth";
@@ -14,7 +15,7 @@ function Index() {
   const [error, setError] = useState<string>('');
   const [isLogin, setIsLogin] = useState<boolean>(true); // Initially show login form
   const [showHelloWorld, setShowHelloWorld] = useState<boolean>(false); // State to control "Hello World"
-  const router = useRouter(); // Initialize the router
+  const router = useRouter(); // Initialize the routere
 
 
   const handleSignUp = async (e: React.FormEvent) => {

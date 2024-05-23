@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../components/sidebar";
 import Header from "../components/header";
 import Main from "../components/main";
@@ -15,7 +15,8 @@ const Layout: React.FC = () => {
     setSelectedMenu(menu);
   };
   return (
-    <div className="flex bg-white overflow-hidden">
+    useEffect(()=>{
+      <div className="flex bg-white overflow-hidden">
       <div className="w-[320px]">
       <Sidebar handleMenuClick={handleMenuClick}/>
       </div>
@@ -25,6 +26,7 @@ const Layout: React.FC = () => {
         </div>
       </div>
     </div>
+    })
   );
 };
 
